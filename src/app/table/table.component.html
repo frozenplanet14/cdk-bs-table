@@ -1,0 +1,16 @@
+<div class="col-12 p-2">
+  <table class="table table-condensed table-striped table-dark" cdk-table [dataSource]="studentDataSource">
+
+    <ng-container *ngFor="let col of displayedColumns" [cdkColumnDef]="col">
+      <th cdk-header-cell *cdkHeaderCellDef [fmSortable]="col" (sort)="onSort($event)"> {{ col | titlecase }} </th>
+      <td cdk-cell *cdkCellDef="let element"> {{element[col]}} </td>
+    </ng-container>
+
+    <thead>
+      <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+    </thead>
+    <tbody>
+      <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+    </tbody>
+  </table>
+</div>

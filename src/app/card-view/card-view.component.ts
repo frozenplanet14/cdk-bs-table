@@ -39,4 +39,8 @@ export class CardViewComponent {
     moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
   }
 
+  onScrolledIndexChange(index: number) {
+    this.service.scrolled = index;
+  }
+
 }

@@ -14,9 +14,10 @@ import { StudentService } from '../student.service';
 export class TableComponent {
   @Input() displayedColumns: string[] = [];
   @Input() dataSource: Observable<StudentResultModel[]>;
-  gridHeight = 300;
+  gridHeight = 240;
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
   @Output() sortOptions = new EventEmitter<SortEvent>();
+  @Output() scrolledIndexChange = new EventEmitter<number>();
 
   onSort({ column, direction }: SortEvent) {
     // resetting other headers
@@ -30,6 +31,10 @@ export class TableComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
+  }
+
+  onScrolledIndexChange(index: number) {
+    this.scrolledIndexChange.next(index);
   }
 
 }

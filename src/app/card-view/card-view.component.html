@@ -27,7 +27,7 @@
           </fm-header>
           <!--  [dataSource]="studentDataSource" -->
           <fm-table [displayedColumns]="displayedColumns" [dataSource]="studentDataSource"
-            (sortOptions)="onSort($event)">
+            (sortOptions)="onSort($event)" (scrolledIndexChange)="onScrolledIndexChange($event)">
           </fm-table>
           <fm-footer>
             <div class="row justify-content-end mx-1">

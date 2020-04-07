@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { SortColumn, SortDirection } from './sortable.directive';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
-import { tap, debounceTime, switchMap, delay } from 'rxjs/operators';
+import { tap, debounceTime, switchMap, delay, first } from 'rxjs/operators';
 import { StudentResultModel } from './student-result.model';
 import { createData } from './student-data.const';
 
 interface State {
   page: number;
   pageSize: number;
-  searchTerm: string;
+  scrollIndex: number;
   sortColumn: SortColumn;
   sortDirection: SortDirection;
 }
@@ -26,10 +26,6 @@ function sort(results: StudentResultModel[], column: SortColumn, direction: stri
   }
 }
 
-function matches(result: StudentResultModel, term: string) {
-  return result.name.toLowerCase().includes(term.toLowerCase());
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,8 +35,8 @@ export class StudentService {
   private _results$ = new BehaviorSubject<StudentResultModel[]>([]);
   private _state: State = {
     page: 1,
-    pageSize: 4,
-    searchTerm: '',
+    pageSize: 20,
+    scrollIndex: 0,
     sortColumn: '',
     sortDirection: ''
   };
@@ -61,7 +57,7 @@ export class StudentService {
   get loading$() { return this._loading$.asObservable(); }
   get results$() { return this._results$.asObservable(); }
 
-  set searchTerm(searchTerm: string) { this._set({ searchTerm }); }
+  set scrolled(index: number) { this._set({ scrollIndex: index }); }
   set sortColumn(sortColumn: SortColumn) { this._set({ sortColumn }); }
   set sortDirection(sortDirection: SortDirection) { this._set({ sortDirection }); }
 
@@ -71,15 +67,22 @@ export class StudentService {
   }
 
   private _fetch(): Observable<StudentResultModel[]> {
-    const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
+    const { sortColumn, sortDirection, pageSize, page, scrollIndex } = this._state;
+    let oldRecords: StudentResultModel[];
+    this._results$.pipe(first()).subscribe(x => oldRecords = x);
+    let results: StudentResultModel[] = [];
 
-    // 1. sort
-    let results = sort(createData(), sortColumn, sortDirection);
-
-    // 2. filter
-    results = results.filter(country => matches(country, searchTerm));
+    if (!scrollIndex) {
+      results = createData(pageSize);
+    } else if ((scrollIndex + 1) * page * 5 >= oldRecords?.length) {
+      results = createData(pageSize);
+      this._state = {
+        ...this._state,
+        page: page + 1
+      };
+    }
 
     // console.log(results);
-    return of(results);
+    return of(sort((oldRecords || []).concat(results), sortColumn, sortDirection));
   }
 }

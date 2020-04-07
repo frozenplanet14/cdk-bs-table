@@ -3,8 +3,7 @@ import { Observable } from 'rxjs';
 import { StudentService } from '../student.service';
 import { StudentResultModel } from '../student-result.model';
 import { SortEvent } from '../sortable.directive';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { DEFAULT_COLUMN_LIST } from '../student-data.const';
+import { DEFAULT_COLUMN_LIST, COLUMN_LIST } from '../student-data.const';
 
 @Component({
   selector: 'fm-card-view',
@@ -17,6 +16,7 @@ export class CardViewComponent {
   isFullScreen: boolean;
   displayedColumns: string[] = [];
   studentDataSource: Observable<StudentResultModel[]>;
+  completeColumnList = COLUMN_LIST;
 
   constructor(private service: StudentService) {
     this.displayedColumns = DEFAULT_COLUMN_LIST;
@@ -27,7 +27,10 @@ export class CardViewComponent {
     this._opened = !this._opened;
   }
 
-  _toggleColumn() {
+  _toggleColumn(data?: string[]) {
+    if (data) {
+      this.displayedColumns = data;
+    }
     this._options = !this._options;
   }
 
@@ -38,10 +41,6 @@ export class CardViewComponent {
   onSort({ column, direction }: SortEvent) {
     this.service.sortColumn = column;
     this.service.sortDirection = direction;
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
   }
 
   onScrolledIndexChange(index: number) {

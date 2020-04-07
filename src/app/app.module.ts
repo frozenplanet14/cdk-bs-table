@@ -17,6 +17,7 @@ import { CardComponent } from './card/card.component';
 import { HeaderComponent, FooterComponent } from './shared/shared.component';
 import { CardViewComponent } from './card-view/card-view.component';
 import { TableFixedSizeVirtualScrollDirective } from './table-fixed-size-virtual-scroll.directive';
+import { ColumnSelectSortComponent } from './column-select-sort/column-select-sort.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TableFixedSizeVirtualScrollDirective } from './table-fixed-size-virtual
     HeaderComponent,
     FooterComponent,
     CardViewComponent,
-    TableFixedSizeVirtualScrollDirective
+    TableFixedSizeVirtualScrollDirective,
+    ColumnSelectSortComponent
   ],
   imports: [
     CommonModule,

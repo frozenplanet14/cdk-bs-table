@@ -1,0 +1,14 @@
+<div class="row">
+  <ul class="list-group col-12 p-2" cdkDropList (cdkDropListDropped)="drop($event)">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let col of columnList"
+      (click)="onSelection(col)" cdkDrag>
+      {{col?.name | titlecase}}
+      <span class="material-icons" *ngIf="col?.isSelected">
+        done
+      </span>
+    </li>
+  </ul>
+  <!-- <a class="col-12 align-self-end text-center">Closes the sidebar</a> -->
+
+  <button type="button" class="col-12 align-self-end text-center btn btn-primary" (click)="onSubmit()">Apply</button>
+</div>

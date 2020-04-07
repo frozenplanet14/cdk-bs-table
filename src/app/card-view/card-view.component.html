@@ -5,18 +5,16 @@
 
       <!-- A sidebar -->
       <ng-sidebar [(opened)]="_opened" [showBackdrop]="true" [closeOnClickBackdrop]="true"
-        sidebarClass="alert alert-info mb-0">
+        [mode]="isFullScreen ? 'slide' : 'over'" sidebarClass="alert alert-info mb-0">
         <p>Sidebar contents</p>
         <a closeSidebar>Closes the sidebar</a>
       </ng-sidebar>
 
       <ng-sidebar [(opened)]="_options" [showBackdrop]="true" [closeOnClickBackdrop]="true"
-        sidebarClass="alert alert-primary mb-0 row" position="right">
-        <ul class="list-group col-12" cdkDropList (cdkDropListDropped)="drop($event)">
-          <li class="list-group-item" *ngFor="let col of displayedColumns" cdkDrag>{{col}}
-          </li>
-        </ul>
-        <a closeSidebar class="col-12 align-self-end text-center">Closes the sidebar</a>
+        sidebarClass="alert alert-primary mb-0" position="right">
+        <fm-column-select-sort class="h-100" [selectedColumns]="displayedColumns"
+          [completeColumnList]="completeColumnList" (finalSelection)="_toggleColumn($event)">
+        </fm-column-select-sort>
       </ng-sidebar>
 
       <!-- Page content -->

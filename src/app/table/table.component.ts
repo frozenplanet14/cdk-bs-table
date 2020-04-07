@@ -1,4 +1,4 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component, ViewChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Observable } from 'rxjs';
 import { StudentResultModel } from '../student-result.model';
@@ -12,14 +12,10 @@ import { StudentService } from '../student.service';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
-  public displayedColumns: string[] = [];
+  @Input() displayedColumns: string[] = [];
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
-  public studentDataSource: Observable<StudentResultModel[]>;
-
-  constructor(private service: StudentService) {
-    this.displayedColumns = Object.keys(STUDENT_DATA[0]);
-    this.studentDataSource = service.results$;
-  }
+  @Input() dataSource: Observable<StudentResultModel[]>;
+  @Output() sortOptions = new EventEmitter<SortEvent>();
 
   onSort({ column, direction }: SortEvent) {
     // resetting other headers
@@ -28,9 +24,7 @@ export class TableComponent {
         header.direction = '';
       }
     });
-
-    this.service.sortColumn = column;
-    this.service.sortDirection = direction;
+    this.sortOptions.next({ column, direction });
   }
 
   drop(event: CdkDragDrop<string[]>) {

@@ -10,17 +10,30 @@
         <a closeSidebar>Closes the sidebar</a>
       </ng-sidebar>
 
+      <ng-sidebar [(opened)]="_options" [showBackdrop]="true" [closeOnClickBackdrop]="true"
+        sidebarClass="alert alert-primary mb-0 row" position="right">
+        <ul class="list-group col-12" cdkDropList (cdkDropListDropped)="drop($event)">
+          <li class="list-group-item" *ngFor="let col of displayedColumns" cdkDrag>{{col}}
+          </li>
+        </ul>
+        <a closeSidebar class="col-12 align-self-end text-center">Closes the sidebar</a>
+      </ng-sidebar>
+
       <!-- Page content -->
       <div ng-sidebar-content>
         <fm-card title="Student Table" subtitle="Grade of student" styleClass="border-primary">
           <fm-header>
             Journal
           </fm-header>
-          <fm-table></fm-table>
+          <fm-table [displayedColumns]="displayedColumns" [dataSource]="studentDataSource"
+            (sortOptions)="onSort($event)">
+          </fm-table>
           <fm-footer>
             <div class="row justify-content-end mx-1">
-              <button type="button" label="Save" class="btn btn-primary" (click)="_toggleSidebar()">Toggle
-                sidebar</button>
+              <button type="button" label="Filter" class="btn btn-primary mr-2"
+                (click)="_toggleSidebar()">Filter</button>
+              <button type="button" label="Column" class="btn btn-secondary" (click)="_toggleColumn()">Column
+                Options</button>
             </div>
           </fm-footer>
         </fm-card>

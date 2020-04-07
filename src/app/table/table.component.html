@@ -1,5 +1,5 @@
 <div class="col-12 p-2">
-  <table class="table table-condensed table-striped table-dark" cdk-table [dataSource]="studentDataSource" cdkDropList
+  <table class="table table-condensed table-striped table-dark" cdk-table [dataSource]="dataSource" cdkDropList
     cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
 
     <ng-container *ngFor="let col of displayedColumns" [cdkColumnDef]="col">

@@ -1,1 +1,15 @@
-<p>card works!</p>
+<div [ngClass]="'card'" [ngStyle]="style" [class]="styleClass">
+  <div class="card-header" *ngIf="header">
+    <ng-content select="fm-header"></ng-content>
+  </div>
+  <div class="card-body">
+    <div class="card-title" *ngIf="title">{{title}}</div>
+    <div class="card-subtitle mb-2 text-muted" *ngIf="subtitle">{{subtitle}}</div>
+    <div class="card-text">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="card-footer" *ngIf="footer">
+    <ng-content select="fm-footer"></ng-content>
+  </div>
+</div>

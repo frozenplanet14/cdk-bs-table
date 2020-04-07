@@ -18,9 +18,9 @@ export function scrollStrategyFactory(scroll: TableFixedSizeVirtualScrollDirecti
   }]
 })
 export class TableFixedSizeVirtualScrollDirective implements OnChanges, OnInit {
-  @Input() rowHeight: number = 40;
+  @Input() rowHeight: number = 48;
 
-  @Input() offset: number = 40;
+  @Input() offset: number = 48;
 
   @Input() fmTableData!: Observable<Array<any>>;
 

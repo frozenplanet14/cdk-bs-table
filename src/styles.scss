@@ -128,3 +128,7 @@ demo {
     color: $white;
   }
 }
+
+thead {
+  @extend .thead-dark;
+}

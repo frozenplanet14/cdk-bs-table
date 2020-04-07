@@ -1,10 +1,9 @@
-import { Component, ViewChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChildren, QueryList, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StudentResultModel } from '../student-result.model';
 import { SortableDirective, SortEvent } from '../sortable.directive';
-import { STUDENT_DATA, createData } from '../student-data.const';
-import { StudentService } from '../student.service';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'fm-table',
@@ -14,10 +13,21 @@ import { StudentService } from '../student.service';
 export class TableComponent {
   @Input() displayedColumns: string[] = [];
   @Input() dataSource: Observable<StudentResultModel[]>;
-  gridHeight = 240;
+  placeholderHeight = 46;
+  gridHeight = 226;
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  public viewPort: CdkVirtualScrollViewport;
   @Output() sortOptions = new EventEmitter<SortEvent>();
   @Output() scrolledIndexChange = new EventEmitter<number>();
+
+  public get inverseOfTranslation(): string {
+    if (!this.viewPort || !this.viewPort['_renderedContentOffset']) {
+      return '-0px';
+    }
+    const offset = this.viewPort['_renderedContentOffset'];
+    return `-${offset}px`;
+  }
 
   onSort({ column, direction }: SortEvent) {
     // resetting other headers

@@ -74,7 +74,7 @@ export class StudentService {
 
     if (!scrollIndex) {
       results = createData(pageSize);
-    } else if ((scrollIndex + 1) * page * 5 >= oldRecords?.length) {
+    } else if ((scrollIndex + 1) * page * 4 >= oldRecords?.length) {
       results = createData(pageSize);
       this._state = {
         ...this._state,
@@ -82,7 +82,6 @@ export class StudentService {
       };
     }
 
-    // console.log(results);
     return of(sort((oldRecords || []).concat(results), sortColumn, sortDirection));
   }
 }

@@ -14,7 +14,7 @@ export class TableVirtualScrollStrategy implements VirtualScrollStrategy {
 
   private dataLength = 0;
 
-  constructor(private scrollHeight: number, private headerOffset: number) {
+  constructor(private rowHeight: number, private headerOffset: number) {
     this.scrolledIndexChange = this.indexChange.asObservable().pipe(distinctUntilChanged());
   }
 
@@ -34,7 +34,7 @@ export class TableVirtualScrollStrategy implements VirtualScrollStrategy {
 
   public onDataLengthChanged(): void {
     if (this.viewport) {
-      this.viewport.setTotalContentSize(this.dataLength * this.scrollHeight);
+      this.viewport.setTotalContentSize(this.dataLength * this.rowHeight);
       this.updateContent(this.viewport);
     }
   }
@@ -57,21 +57,20 @@ export class TableVirtualScrollStrategy implements VirtualScrollStrategy {
   }
 
   public setScrollHeight(rowHeight: number, headerOffset: number) {
-    this.scrollHeight = rowHeight;
+    this.rowHeight = rowHeight;
     this.headerOffset = headerOffset;
     this.updateContent(this.viewport);
   }
 
   private updateContent(viewport: CdkVirtualScrollViewport) {
     if (viewport) {
-      const range = Math.ceil(viewport.getViewportSize() / this.scrollHeight) + this.bufferSize * 2;
-      const newIndex = Math.max(0, Math.round((viewport.measureScrollOffset() - this.headerOffset) / this.scrollHeight) - this.bufferSize);
-      const dataLength = this.dataLength;
+      const range = Math.ceil(viewport.getViewportSize() / this.rowHeight) + this.bufferSize * 2;
+      const newIndex = Math.max(0, Math.round((viewport.measureScrollOffset() - this.headerOffset) / this.rowHeight) - this.bufferSize);
 
       const start = Math.max(0, newIndex - this.bufferSize);
-      const end = Math.min(dataLength, newIndex + range);
+      const end = Math.min(this.dataLength, newIndex + range);
 
-      viewport.setRenderedContentOffset(this.scrollHeight * start);
+      viewport.setRenderedContentOffset(this.rowHeight * start);
       viewport.setRenderedRange({ start, end });
 
       this.indexChange.next(newIndex);

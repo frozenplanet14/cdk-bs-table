@@ -28,3 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 https://github.com/mainawycliffe/angular-cdk-table-demo
 https://github.com/angular/components/issues/10122
+
+[ng-sidebar](https://github.com/arkon/ng-sidebar)
+[Bootstrap](https://getbootstrap.com/)
+[ng-bootstrap](https://ng-bootstrap.github.io/#/home)

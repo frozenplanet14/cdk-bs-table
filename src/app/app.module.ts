@@ -18,6 +18,8 @@ import { HeaderComponent, FooterComponent } from './shared/shared.component';
 import { CardViewComponent } from './card-view/card-view.component';
 import { TableFixedSizeVirtualScrollDirective } from './table-fixed-size-virtual-scroll.directive';
 import { ColumnSelectSortComponent } from './column-select-sort/column-select-sort.component';
+import { FilterTableComponent } from './filter-table/filter-table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ColumnSelectSortComponent } from './column-select-sort/column-select-so
     FooterComponent,
     CardViewComponent,
     TableFixedSizeVirtualScrollDirective,
-    ColumnSelectSortComponent
+    ColumnSelectSortComponent,
+    FilterTableComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,9 @@ import { ColumnSelectSortComponent } from './column-select-sort/column-select-so
     DragDropModule,
     ScrollingModule,
     NgbModule,
-    SidebarModule.forRoot()
+    SidebarModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

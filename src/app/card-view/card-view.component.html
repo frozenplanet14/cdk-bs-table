@@ -4,9 +4,9 @@
     <ng-sidebar-container [ngClass]="{'full-screen': isFullScreen, 'small-screen': !isFullScreen}">
 
       <!-- A sidebar -->
-      <ng-sidebar [(opened)]="_opened" [showBackdrop]="true" [closeOnClickBackdrop]="true"
-        [mode]="isFullScreen ? 'slide' : 'over'" sidebarClass="alert alert-info mb-0">
-        <p>Sidebar contents</p>
+      <ng-sidebar [(opened)]="_opened" [showBackdrop]="!isFullScreen" [closeOnClickBackdrop]="true"
+        [mode]="isFullScreen ? 'slide' : 'over'" sidebarClass="alert alert-info">
+        <fm-filter-table class="col-12" (searchText)="service.searchTerm = $event"></fm-filter-table>
         <a closeSidebar>Closes the sidebar</a>
       </ng-sidebar>
 
@@ -19,7 +19,7 @@
 
       <!-- Page content -->
       <div ng-sidebar-content>
-        <fm-card title="Student Table" subtitle="Grade of student" styleClass="border-primary"
+        <fm-card title="Student Table" subtitle="Contact Detail" styleClass="border-primary"
           [isCardExpanded]="isFullScreen">
           <fm-header>
             Journal <span class="float-right material-icons" (click)="toggleFullScreen()">

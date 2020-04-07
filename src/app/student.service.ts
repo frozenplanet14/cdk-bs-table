@@ -9,6 +9,7 @@ interface State {
   page: number;
   pageSize: number;
   scrollIndex: number;
+  searchTerm: string;
   sortColumn: SortColumn;
   sortDirection: SortDirection;
 }
@@ -26,6 +27,11 @@ function sort(results: StudentResultModel[], column: SortColumn, direction: stri
   }
 }
 
+function matches(result: StudentResultModel, term: string) {
+  return result.name.toLowerCase().includes(term.toLowerCase())
+    || result.userName.toLowerCase().includes(term.toLowerCase());
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +44,7 @@ export class StudentService {
     page: 1,
     pageSize: 20,
     scrollIndex: 0,
+    searchTerm: '',
     sortColumn: '',
     sortDirection: ''
   };
@@ -59,7 +66,8 @@ export class StudentService {
   get loading$() { return this._loading$.asObservable(); }
   get results$() { return this._results$.asObservable(); }
 
-  set scrolled(index: number) { this._set({ scrollIndex: index }); }
+  set searchTerm(searchTerm: string) { this._set({ searchTerm }); }
+  set scrolled(scrollIndex: number) { this._set({ scrollIndex }); }
   set sortColumn(sortColumn: SortColumn) { this._set({ sortColumn }); }
   set sortDirection(sortDirection: SortDirection) { this._set({ sortDirection }); }
 
@@ -95,7 +103,7 @@ export class StudentService {
   }
 
   private _fetch(): Observable<StudentResultModel[]> {
-    const { sortColumn, sortDirection, pageSize, page, scrollIndex } = this._state;
+    const { sortColumn, sortDirection, pageSize, page, scrollIndex, searchTerm } = this._state;
     let oldRecords: StudentResultModel[];
     this._results$.pipe(first()).subscribe(x => oldRecords = x);
     let results: StudentResultModel[] = [];
@@ -109,7 +117,11 @@ export class StudentService {
         page: page + 1
       };
     }
+    // sort the result
+    results = sort((oldRecords || []).concat(results), sortColumn, sortDirection);
+    // filter the result
+    results = results.filter(country => matches(country, searchTerm));
 
-    return of(sort((oldRecords || []).concat(results), sortColumn, sortDirection));
+    return of(results);
   }
 }

@@ -18,7 +18,7 @@ export class CardViewComponent {
   studentDataSource: Observable<StudentResultModel[]>;
   completeColumnList = COLUMN_LIST;
 
-  constructor(private service: StudentService) {
+  constructor(public service: StudentService) {
     this.displayedColumns = DEFAULT_COLUMN_LIST;
     this.studentDataSource = service.results$;
   }

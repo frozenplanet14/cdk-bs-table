@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center align-items-center">
     <!-- Container for sidebar(s) + page content -->
-    <ng-sidebar-container [style.height]="'620px'" [style]="{width: '400px'}">
+    <ng-sidebar-container [ngClass]="{'full-screen': isFullScreen, 'small-screen': !isFullScreen}">
 
       <!-- A sidebar -->
       <ng-sidebar [(opened)]="_opened" [showBackdrop]="true" [closeOnClickBackdrop]="true"
@@ -21,9 +21,12 @@
 
       <!-- Page content -->
       <div ng-sidebar-content>
-        <fm-card title="Student Table" subtitle="Grade of student" styleClass="border-primary">
+        <fm-card title="Student Table" subtitle="Grade of student" styleClass="border-primary"
+          [isCardExpanded]="isFullScreen">
           <fm-header>
-            Journal
+            Journal <span class="float-right material-icons" (click)="toggleFullScreen()">
+              {{isFullScreen ? 'fullscreen_exit' : 'fullscreen'}}
+            </span>
           </fm-header>
           <!--  [dataSource]="studentDataSource" -->
           <fm-table [displayedColumns]="displayedColumns" [dataSource]="studentDataSource"

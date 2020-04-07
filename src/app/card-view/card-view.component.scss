@@ -1,0 +1,19 @@
+.material-icons {
+  cursor: pointer;
+}
+
+.small-screen {
+  height: 442px;
+  width: 400px;
+}
+
+.full-screen {
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  height: calc(100% - 72px);
+}

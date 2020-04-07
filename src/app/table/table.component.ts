@@ -16,11 +16,10 @@ export class TableComponent {
   placeholderHeight = 46;
   gridHeight = 226;
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
-  @ViewChild(CdkVirtualScrollViewport, { static: false })
-  public viewPort: CdkVirtualScrollViewport;
   @Output() sortOptions = new EventEmitter<SortEvent>();
   @Output() scrolledIndexChange = new EventEmitter<number>();
 
+  @ViewChild(CdkVirtualScrollViewport, { static: false }) public viewPort: CdkVirtualScrollViewport;
   public get inverseOfTranslation(): string {
     if (!this.viewPort || !this.viewPort['_renderedContentOffset']) {
       return '-0px';

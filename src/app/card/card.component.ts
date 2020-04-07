@@ -13,6 +13,7 @@ export class CardComponent implements OnInit {
   @ContentChild(FooterComponent) footer;
   @Input() style: any;
   @Input() styleClass: string;
+  @Input() isCardExpanded: boolean;
 
   constructor() { }
 

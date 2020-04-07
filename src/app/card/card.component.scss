@@ -1,0 +1,11 @@
+.card {
+  transition: all 1s linear;
+}
+
+.fullscreen {
+  position: fixed;
+  width: 100%;
+  height: calc(100% - 72px);
+  left: 0;
+  top: 60px;
+}

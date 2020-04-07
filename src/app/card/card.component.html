@@ -1,4 +1,4 @@
-<div [ngClass]="'card'" [ngStyle]="style" [class]="styleClass">
+<div [ngClass]="{'fullscreen': isCardExpanded, 'card': true}" [ngStyle]="style" [class]="styleClass">
   <div class="card-header" *ngIf="header">
     <ng-content select="fm-header"></ng-content>
   </div>

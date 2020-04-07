@@ -14,6 +14,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class CardViewComponent {
   _opened: boolean = false;
   _options: boolean = false;
+  isFullScreen: boolean;
   displayedColumns: string[] = [];
   studentDataSource: Observable<StudentResultModel[]>;
 
@@ -28,6 +29,10 @@ export class CardViewComponent {
 
   _toggleColumn() {
     this._options = !this._options;
+  }
+
+  toggleFullScreen() {
+    this.isFullScreen = !this.isFullScreen;
   }
 
   onSort({ column, direction }: SortEvent) {

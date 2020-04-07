@@ -2,6 +2,10 @@ table {
   width: 100%;
 }
 
+.table td {
+  white-space: nowrap;
+}
+
 th.asc:before,
 th.desc:before {
   content: "";

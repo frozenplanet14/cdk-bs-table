@@ -1,8 +1,19 @@
 
 export interface StudentResultModel {
-  id?: number;
+  id: string;
+  userName: string;
   name: string;
-  class: string;
-  marks: string;
-  grade: string;
+  title: string;
+  email: string;
+  phone: string;
+  streetAddress: string;
+  city: string;
+  state: string;
+  country: string;
+  zipCode: string;
+  job: string;
+  bio: string;
+  dob: Date;
+  status: boolean;
+  companyName: string;
 }

@@ -9,6 +9,12 @@ export function scrollStrategyFactory(scroll: TableFixedSizeVirtualScrollDirecti
   return scroll.scrollStrategy;
 }
 
+const defaults = {
+  rowHeight: 48,
+  headerOffset: 48,
+  bufferSize: 0.7
+};
+
 @Directive({
   selector: 'cdk-virtual-scroll-viewport[fmTableData]',
   providers: [{
@@ -18,9 +24,11 @@ export function scrollStrategyFactory(scroll: TableFixedSizeVirtualScrollDirecti
   }]
 })
 export class TableFixedSizeVirtualScrollDirective implements OnChanges, OnInit {
-  @Input() rowHeight: number = 48;
+  @Input() rowHeight: number = defaults.rowHeight;
 
-  @Input() offset: number = 48;
+  @Input() offset: number = defaults.headerOffset;
+
+  @Input() bufferSize: number = defaults.bufferSize;
 
   @Input() fmTableData!: Observable<Array<any>>;
 
@@ -28,7 +36,7 @@ export class TableFixedSizeVirtualScrollDirective implements OnChanges, OnInit {
 
   @ContentChild(CdkTable, { static: true }) table: CdkTable<any>;
 
-  public scrollStrategy = new TableVirtualScrollStrategy(this.rowHeight, this.offset);
+  public scrollStrategy = new TableVirtualScrollStrategy();
 
   public ngOnInit() {
     this.table.dataSource = combineLatest([this.fmTableData, this.scrollStrategy.renderedRangeStream]).pipe(
@@ -44,6 +52,11 @@ export class TableFixedSizeVirtualScrollDirective implements OnChanges, OnInit {
   }
 
   public ngOnChanges() {
-    this.scrollStrategy.setScrollHeight(this.rowHeight, this.offset);
+    const config = {
+      rowHeight: +this.rowHeight || defaults.rowHeight,
+      headerOffset: +this.offset || defaults.headerOffset,
+      bufferSize: +this.bufferSize || defaults.bufferSize
+    };
+    this.scrollStrategy.setConfig(config);
   }
 }

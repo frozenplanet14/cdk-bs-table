@@ -3,7 +3,7 @@ import { SortColumn, SortDirection } from './sortable.directive';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { tap, debounceTime, switchMap, delay, first } from 'rxjs/operators';
 import { StudentResultModel } from './student-result.model';
-import { createData } from './student-data.const';
+import * as faker from 'faker';
 
 interface State {
   page: number;
@@ -30,6 +30,7 @@ function sort(results: StudentResultModel[], column: SortColumn, direction: stri
   providedIn: 'root'
 })
 export class StudentService {
+  // tslint:disable: variable-name
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _fetch$ = new Subject<void>();
   private _results$ = new BehaviorSubject<StudentResultModel[]>([]);
@@ -40,6 +41,7 @@ export class StudentService {
     sortColumn: '',
     sortDirection: ''
   };
+  // tslint:enable: variable-name
   constructor() {
     this._fetch$.pipe(
       tap(() => this._loading$.next(true)),
@@ -66,6 +68,32 @@ export class StudentService {
     this._fetch$.next();
   }
 
+  createData(size: number = 1000): StudentResultModel[] {
+    const result: StudentResultModel[] = [];
+    for (let i = 0; i < size; i++) {
+      const num = Math.floor(Math.random() * 10);
+      result.push({
+        id: faker.random.uuid(),
+        userName: faker.internet.userName(),
+        name: faker.name.findName(),
+        title: faker.name.title(),
+        email: faker.internet.email(),
+        phone: faker.phone.phoneNumber(),
+        streetAddress: faker.address.streetAddress(),
+        city: faker.address.city(),
+        state: faker.address.state(),
+        country: faker.address.country(),
+        zipCode: faker.address.zipCode(),
+        job: faker.name.jobType(),
+        bio: faker.lorem.sentence(),
+        dob: faker.date.recent(),
+        status: faker.random.boolean(),
+        companyName: faker.company.companyName()
+      });
+    }
+    return result;
+  }
+
   private _fetch(): Observable<StudentResultModel[]> {
     const { sortColumn, sortDirection, pageSize, page, scrollIndex } = this._state;
     let oldRecords: StudentResultModel[];
@@ -73,9 +101,9 @@ export class StudentService {
     let results: StudentResultModel[] = [];
 
     if (!scrollIndex) {
-      results = createData(pageSize);
+      results = this.createData(pageSize);
     } else if ((scrollIndex + 1) * page * 4 >= oldRecords?.length) {
-      results = createData(pageSize);
+      results = this.createData(pageSize);
       this._state = {
         ...this._state,
         page: page + 1

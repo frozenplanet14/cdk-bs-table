@@ -13,18 +13,20 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 export class TableComponent {
   @Input() displayedColumns: string[] = [];
   @Input() dataSource: Observable<StudentResultModel[]>;
-  placeholderHeight = 46;
-  gridHeight = 226;
+  @Input() gridHeight = 226;
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
   @Output() sortOptions = new EventEmitter<SortEvent>();
   @Output() scrolledIndexChange = new EventEmitter<number>();
 
+  // Added as the sticky header not working properly on scroll due to transform
   @ViewChild(CdkVirtualScrollViewport, { static: false }) public viewPort: CdkVirtualScrollViewport;
   public get inverseOfTranslation(): string {
+    // tslint:disable: no-string-literal
     if (!this.viewPort || !this.viewPort['_renderedContentOffset']) {
       return '-0px';
     }
     const offset = this.viewPort['_renderedContentOffset'];
+    // tslint:enable: no-string-literal
     return `-${offset}px`;
   }
 

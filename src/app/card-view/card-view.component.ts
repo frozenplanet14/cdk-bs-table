@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StudentService } from '../student.service';
-import { STUDENT_DATA } from '../student-data.const';
 import { StudentResultModel } from '../student-result.model';
 import { SortEvent } from '../sortable.directive';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DEFAULT_COLUMN_LIST } from '../student-data.const';
 
 @Component({
   selector: 'fm-card-view',
@@ -19,7 +19,7 @@ export class CardViewComponent {
   studentDataSource: Observable<StudentResultModel[]>;
 
   constructor(private service: StudentService) {
-    this.displayedColumns = Object.keys(STUDENT_DATA[0]);
+    this.displayedColumns = DEFAULT_COLUMN_LIST;
     this.studentDataSource = service.results$;
   }
 

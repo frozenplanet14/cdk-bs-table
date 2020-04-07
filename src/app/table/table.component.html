@@ -1,6 +1,6 @@
 <div class="col-12 p-1">
   <cdk-virtual-scroll-viewport [style.height.px]="gridHeight" [fmTableData]="dataSource" rowHeight="45" offset="46"
-    (scrolledIndexChange)="onScrolledIndexChange($event)">
+    [bufferSize]="gridHeight/(45 * 7)" (scrolledIndexChange)="onScrolledIndexChange($event)">
     <table class="table table-condensed table-striped" cdk-table cdkDropList cdkDropListOrientation="horizontal"
       (cdkDropListDropped)="drop($event)">
 

@@ -12,3 +12,12 @@ export const STUDENT_DATA: StudentResultModel[] = [
   { name: 'Pius', class: 'Grade 6', marks: '400', grade: 'A-' },
   { name: 'Kenendy', class: 'Grade 6', marks: '150', grade: 'D' }
 ];
+
+export function createData(size: number = 1000): StudentResultModel[] {
+  const result: StudentResultModel[] = [];
+  for (let i = 0; i < size; i++) {
+    const num = Math.floor(Math.random() * 10);
+    result.push({ id: i + 1, ...STUDENT_DATA[num] });
+  }
+  return result;
+}

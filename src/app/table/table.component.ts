@@ -1,9 +1,9 @@
 import { Component, ViewChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { StudentResultModel } from '../student-result.model';
 import { SortableDirective, SortEvent } from '../sortable.directive';
-import { STUDENT_DATA } from '../student-data.const';
+import { STUDENT_DATA, createData } from '../student-data.const';
 import { StudentService } from '../student.service';
 
 @Component({
@@ -13,8 +13,9 @@ import { StudentService } from '../student.service';
 })
 export class TableComponent {
   @Input() displayedColumns: string[] = [];
-  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
   @Input() dataSource: Observable<StudentResultModel[]>;
+  gridHeight = 300;
+  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
   @Output() sortOptions = new EventEmitter<SortEvent>();
 
   onSort({ column, direction }: SortEvent) {

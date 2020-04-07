@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { CdkTableModule } from '@angular/cdk/table';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarModule } from 'ng-sidebar';
@@ -9,11 +13,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
 import { SortableDirective } from './sortable.directive';
-import { CommonModule } from '@angular/common';
 import { CardComponent } from './card/card.component';
 import { HeaderComponent, FooterComponent } from './shared/shared.component';
 import { CardViewComponent } from './card-view/card-view.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TableFixedSizeVirtualScrollDirective } from './table-fixed-size-virtual-scroll.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CardComponent,
     HeaderComponent,
     FooterComponent,
-    CardViewComponent
+    CardViewComponent,
+    TableFixedSizeVirtualScrollDirective
   ],
   imports: [
     CommonModule,
@@ -31,6 +35,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     AppRoutingModule,
     CdkTableModule,
     DragDropModule,
+    ScrollingModule,
     NgbModule,
     SidebarModule.forRoot()
   ],

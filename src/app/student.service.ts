@@ -3,7 +3,7 @@ import { SortColumn, SortDirection } from './sortable.directive';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { tap, debounceTime, switchMap, delay } from 'rxjs/operators';
 import { StudentResultModel } from './student-result.model';
-import { STUDENT_DATA } from './student-data.const';
+import { createData } from './student-data.const';
 
 interface State {
   page: number;
@@ -74,14 +74,12 @@ export class StudentService {
     const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
     // 1. sort
-    let countries = sort(STUDENT_DATA, sortColumn, sortDirection);
+    let results = sort(createData(), sortColumn, sortDirection);
 
     // 2. filter
-    countries = countries.filter(country => matches(country, searchTerm));
-    const total = countries.length;
+    results = results.filter(country => matches(country, searchTerm));
 
-    // 3. paginate
-    countries = countries.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of(countries);
+    // console.log(results);
+    return of(results);
   }
 }

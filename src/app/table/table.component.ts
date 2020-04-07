@@ -1,4 +1,5 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Observable } from 'rxjs';
 import { StudentResultModel } from '../student-result.model';
 import { SortableDirective, SortEvent } from '../sortable.directive';
@@ -30,6 +31,10 @@ export class TableComponent {
 
     this.service.sortColumn = column;
     this.service.sortDirection = direction;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
   }
 
 }

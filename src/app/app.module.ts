@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './card/card.component';
 import { HeaderComponent, FooterComponent } from './shared/shared.component';
 import { CardViewComponent } from './card-view/card-view.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CardViewComponent } from './card-view/card-view.component';
     BrowserModule,
     AppRoutingModule,
     CdkTableModule,
+    DragDropModule,
     NgbModule,
     SidebarModule.forRoot()
   ],

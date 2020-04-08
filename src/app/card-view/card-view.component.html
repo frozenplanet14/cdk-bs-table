@@ -22,14 +22,13 @@
         <fm-card title="Student Table" subtitle="Contact Detail" styleClass="border-primary"
           [isCardExpanded]="isFullScreen">
           <fm-header>
-            Journal <span class="float-right material-icons" (click)="toggleFullScreen()">
+            Student Record <span class="float-right material-icons" (click)="toggleFullScreen()">
               {{isFullScreen ? 'fullscreen_exit' : 'fullscreen'}}
             </span>
           </fm-header>
-          <!--  [dataSource]="studentDataSource" -->
           <fm-table [displayedColumns]="displayedColumns" [dataSource]="studentDataSource"
             [gridHeight]="isFullScreen ? 600 : 226" (sortOptions)="onSort($event)"
-            (scrolledIndexChange)="onScrolledIndexChange($event)">
+            (scrolledIndexChange)="onScrolledIndexChange($event)" (rowSelected)="onRowSelection($event)">
           </fm-table>
           <fm-footer>
             <div class="row justify-content-end mx-1">

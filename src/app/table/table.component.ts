@@ -17,6 +17,7 @@ export class TableComponent {
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
   @Output() sortOptions = new EventEmitter<SortEvent>();
   @Output() scrolledIndexChange = new EventEmitter<number>();
+  @Output() rowSelected = new EventEmitter<StudentResultModel>();
 
   // Added as the sticky header not working properly on scroll due to transform
   @ViewChild(CdkVirtualScrollViewport, { static: false }) public viewPort: CdkVirtualScrollViewport;
@@ -46,6 +47,10 @@ export class TableComponent {
 
   onScrolledIndexChange(index: number) {
     this.scrolledIndexChange.next(index);
+  }
+
+  onRowSelection(record: StudentResultModel) {
+    this.rowSelected.next(record);
   }
 
 }

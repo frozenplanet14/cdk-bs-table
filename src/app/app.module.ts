@@ -20,6 +20,9 @@ import { TableFixedSizeVirtualScrollDirective } from './table-fixed-size-virtual
 import { ColumnSelectSortComponent } from './column-select-sort/column-select-sort.component';
 import { FilterTableComponent } from './filter-table/filter-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailViewComponent } from './detail-view/detail-view.component';
+import { PersonDetailComponent } from './detail-view/person-detail/person-detail.component';
+import { AccountsComponent } from './detail-view/accounts/accounts.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CardViewComponent,
     TableFixedSizeVirtualScrollDirective,
     ColumnSelectSortComponent,
-    FilterTableComponent
+    FilterTableComponent,
+    DetailViewComponent,
+    PersonDetailComponent,
+    AccountsComponent
   ],
   imports: [
     CommonModule,

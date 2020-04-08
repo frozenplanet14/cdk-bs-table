@@ -1,0 +1,25 @@
+<fm-card styleClass="border-primary tabbed-card mt-2">
+  <fm-header>
+    Detail View
+  </fm-header>
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li ngbNavItem>
+      <a ngbNavLink>Person Detail</a>
+      <ng-template ngbNavContent>
+        <fm-person-detail></fm-person-detail>
+      </ng-template>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>Accounts</a>
+      <ng-template ngbNavContent>
+        <fm-accounts></fm-accounts>
+      </ng-template>
+    </li>
+    <li class="ml-auto my-auto">
+      <button type="button" class="btn btn-primary btn-sm">Primary</button>
+      <button type="button" class="btn btn-secondary mx-2 btn-sm">Secondary</button>
+      <button type="button" class="btn btn-dark mr-2 btn-sm">Dark</button>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
+</fm-card>

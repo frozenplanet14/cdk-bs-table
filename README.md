@@ -1,4 +1,4 @@
-# CdkBsTable
+# CDK Bootstrap Table
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
 
@@ -26,8 +26,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-https://github.com/mainawycliffe/angular-cdk-table-demo
-https://github.com/angular/components/issues/10122
+## References
+
+[CDK Table Demo](https://github.com/mainawycliffe/angular-cdk-table-demo)
+[CDK Table Sticky Issue](https://github.com/angular/components/issues/10122)
 
 [ng-sidebar](https://github.com/arkon/ng-sidebar)
 [Bootstrap](https://getbootstrap.com/)

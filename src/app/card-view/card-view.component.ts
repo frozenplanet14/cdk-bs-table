@@ -4,6 +4,7 @@ import { StudentService } from '../student.service';
 import { StudentResultModel } from '../student-result.model';
 import { SortEvent } from '../sortable.directive';
 import { DEFAULT_COLUMN_LIST, COLUMN_LIST } from '../student-data.const';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fm-card-view',
@@ -18,7 +19,7 @@ export class CardViewComponent {
   studentDataSource: Observable<StudentResultModel[]>;
   completeColumnList = COLUMN_LIST;
 
-  constructor(public service: StudentService) {
+  constructor(public service: StudentService, private router: Router) {
     this.displayedColumns = DEFAULT_COLUMN_LIST;
     this.studentDataSource = service.results$;
   }
@@ -45,6 +46,11 @@ export class CardViewComponent {
 
   onScrolledIndexChange(index: number) {
     this.service.scrolled = index;
+  }
+
+  onRowSelection(record: StudentResultModel) {
+    console.log(record);
+    this.router.navigate(['/detail']);
   }
 
 }

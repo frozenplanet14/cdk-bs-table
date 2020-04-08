@@ -132,3 +132,9 @@ demo {
 thead {
   @extend .thead-dark;
 }
+
+.tabbed-card {
+  .card-body {
+    padding: 0;
+  }
+}

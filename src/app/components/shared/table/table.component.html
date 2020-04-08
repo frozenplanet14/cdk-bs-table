@@ -15,7 +15,8 @@
         <tr cdk-header-row *cdkHeaderRowDef="displayedColumns; sticky: true"></tr>
       </thead>
       <tbody>
-        <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;" (click)="onRowSelection(row)"></tr>
+        <tr style="cursor: pointer;" cdk-row *cdkRowDef="let row; columns: displayedColumns;"
+          (click)="onRowSelection(row)"></tr>
       </tbody>
     </table>
   </cdk-virtual-scroll-viewport>

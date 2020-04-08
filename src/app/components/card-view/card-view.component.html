@@ -5,13 +5,20 @@
 
       <!-- A sidebar -->
       <ng-sidebar [(opened)]="_opened" [showBackdrop]="!isFullScreen" [closeOnClickBackdrop]="true"
-        [mode]="isFullScreen ? 'slide' : 'over'" sidebarClass="alert alert-info">
-        <fm-filter-table class="col-12" (searchText)="service.searchTerm = $event"></fm-filter-table>
-        <a closeSidebar>Closes the sidebar</a>
+        [mode]="isFullScreen ? 'slide' : 'over'" sidebarClass="alert alert-info mb-0 p-0">
+        <div class="d-flex align-items-start flex-column h-100">
+          <div class="mb-auto">
+            <fm-filter-table (searchText)="service.searchTerm = $event" (closeFilter)="_toggleSidebar()">
+            </fm-filter-table>
+          </div>
+          <div class="d-flex w-100 justify-content-center my-2">
+            <a closeSidebar>Closes the sidebar</a>
+          </div>
+        </div>
       </ng-sidebar>
 
       <ng-sidebar [(opened)]="_options" [showBackdrop]="true" [closeOnClickBackdrop]="true"
-        sidebarClass="alert alert-primary mb-0" position="right">
+        sidebarClass="alert alert-primary mb-0" position="right" [autoFocus]="false">
         <fm-column-select-sort class="h-100" [selectedColumns]="displayedColumns"
           [completeColumnList]="completeColumnList" (finalSelection)="_toggleColumn($event)">
         </fm-column-select-sort>
@@ -19,25 +26,27 @@
 
       <!-- Page content -->
       <div ng-sidebar-content>
-        <fm-card title="Student Table" subtitle="Contact Detail" styleClass="border-primary"
-          [isCardExpanded]="isFullScreen">
+        <fm-card title="Contact Detail" styleClass="border-primary" [isCardExpanded]="isFullScreen">
           <fm-header>
-            Student Record <span class="float-right material-icons" (click)="toggleFullScreen()">
-              {{isFullScreen ? 'fullscreen_exit' : 'fullscreen'}}
-            </span>
+            <div class="d-flex">
+              <div class="mr-auto d-flex align-items-center">
+                Student Record
+                <span class="material-icons ml-2" *ngIf="!_opened" (click)="_toggleSidebar()">
+                  menu
+                </span>
+              </div>
+              <span class="material-icons mr-2" (click)="_toggleColumn()">
+                subject
+              </span>
+              <span class=" material-icons" (click)="toggleFullScreen()">
+                {{isFullScreen ? 'fullscreen_exit' : 'fullscreen'}}
+              </span>
+            </div>
           </fm-header>
           <fm-table [displayedColumns]="displayedColumns" [dataSource]="studentDataSource"
-            [gridHeight]="isFullScreen ? 600 : 226" (sortOptions)="onSort($event)"
+            [gridHeight]="isFullScreen ? 720 : 300" (sortOptions)="onSort($event)"
             (scrolledIndexChange)="onScrolledIndexChange($event)" (rowSelected)="onRowSelection($event)">
           </fm-table>
-          <fm-footer>
-            <div class="row justify-content-end mx-1">
-              <button type="button" label="Filter" class="btn btn-primary mr-2"
-                (click)="_toggleSidebar()">Filter</button>
-              <button type="button" label="Column" class="btn btn-secondary" (click)="_toggleColumn()">Column
-                Options</button>
-            </div>
-          </fm-footer>
         </fm-card>
       </div>
 

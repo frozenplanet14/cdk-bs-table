@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 export class FilterTableComponent implements OnInit {
   searchFormControl = new FormControl();
   @Output() searchText = new EventEmitter<string>();
+  @Output() closeFilter = new EventEmitter<void>();
   constructor() { }
 
   ngOnInit(): void {

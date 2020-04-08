@@ -14,7 +14,6 @@ export class DetailViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.studentService.getDetailViewData();
-    console.log(this.data);
   }
 
   goBack() {

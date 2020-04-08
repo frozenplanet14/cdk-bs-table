@@ -1,8 +1,20 @@
-<div class="row mb-5">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
-    <div class="input-group-append">
-      <button type="button" class="btn btn-primary" (click)="onSearch()">Apply</button>
+<fm-card>
+  <fm-header>
+    <div class="row">
+      <div class="mr-auto d-flex align-items-center">
+        Filter
+      </div>
+      <span class="material-icons" (click)="closeFilter.next()">
+        menu_open
+      </span>
+    </div>
+  </fm-header>
+  <div class="row mb-5">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search..." [formControl]="searchFormControl">
+      <div class="input-group-append">
+        <button type="button" class="btn btn-primary" (click)="onSearch()">Apply</button>
+      </div>
     </div>
   </div>
-</div>
+</fm-card>

@@ -1,8 +1,8 @@
 import { Component, ViewChildren, QueryList, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Observable } from 'rxjs';
-import { StudentResultModel } from '../../models/student-result.model';
-import { SortableDirective, SortEvent } from '../../directives/sortable.directive';
+import { StudentResultModel } from '../../../models/student-result.model';
+import { SortableDirective, SortEvent } from '../../../directives/sortable.directive';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({

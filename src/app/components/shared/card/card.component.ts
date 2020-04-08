@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ContentChild } from '@angular/core';
-import { HeaderComponent, FooterComponent } from '../shared/shared.component';
+import { HeaderComponent, FooterComponent } from '../shared.component';
 
 @Component({
   selector: 'fm-card',

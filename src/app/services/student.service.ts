@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { SortColumn, SortDirection } from './sortable.directive';
+import { SortColumn, SortDirection } from '../directives/sortable.directive';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { tap, debounceTime, switchMap, delay, first } from 'rxjs/operators';
-import { StudentResultModel } from './student-result.model';
+import { StudentResultModel } from '../models/student-result.model';
 import * as faker from 'faker';
 
 interface State {

@@ -1,7 +1,7 @@
 import { Directive, OnChanges, OnInit, forwardRef, Input, ContentChild } from '@angular/core';
 import { VIRTUAL_SCROLL_STRATEGY, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Observable, combineLatest } from 'rxjs';
-import { TableVirtualScrollStrategy } from './table-virtual-scroll-strategy';
+import { TableVirtualScrollStrategy } from '../services/table-virtual-scroll-strategy';
 import { map } from 'rxjs/operators';
 import { CdkTable } from '@angular/cdk/table';
 

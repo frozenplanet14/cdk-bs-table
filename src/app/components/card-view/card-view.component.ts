@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StudentService } from '../student.service';
-import { StudentResultModel } from '../student-result.model';
-import { SortEvent } from '../sortable.directive';
-import { DEFAULT_COLUMN_LIST, COLUMN_LIST } from '../student-data.const';
+import { StudentService } from '../../services/student.service';
+import { StudentResultModel } from '../../models/student-result.model';
+import { SortEvent } from '../../directives/sortable.directive';
+import { DEFAULT_COLUMN_LIST, COLUMN_LIST } from '../../models/student-data.const';
 import { Router } from '@angular/router';
 
 @Component({

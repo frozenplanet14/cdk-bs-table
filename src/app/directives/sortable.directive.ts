@@ -1,5 +1,5 @@
 import { Directive, Input, Output, EventEmitter } from '@angular/core';
-import { StudentResultModel } from './student-result.model';
+import { StudentResultModel } from '../models/student-result.model';
 
 export type SortColumn = keyof StudentResultModel | '';
 export type SortDirection = 'asc' | 'desc' | '';

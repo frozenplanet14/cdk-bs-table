@@ -29,8 +29,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## References
 
 [CDK Table Demo](https://github.com/mainawycliffe/angular-cdk-table-demo)
+
 [CDK Table Sticky Issue](https://github.com/angular/components/issues/10122)
 
 [ng-sidebar](https://github.com/arkon/ng-sidebar)
+
 [Bootstrap](https://getbootstrap.com/)
+
 [ng-bootstrap](https://ng-bootstrap.github.io/#/home)

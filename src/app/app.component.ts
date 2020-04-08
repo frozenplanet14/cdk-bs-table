@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  // tslint:disable: variable-name
+  // tslint:disable: no-inferrable-types
   _opened: boolean = false;
   _modeNum: number = 0;
   _positionNum: number = 0;
@@ -19,6 +21,8 @@ export class AppComponent {
   _keyClose: boolean = false;
   _autoCollapseHeight: number = null;
   _autoCollapseWidth: number = null;
+  // tslint:enable: variable-name
+  // tslint:enable: no-inferrable-types
 
   _MODES: Array<string> = ['over', 'push', 'slide'];
   _POSITIONS: Array<string> = ['left', 'right', 'top', 'bottom'];

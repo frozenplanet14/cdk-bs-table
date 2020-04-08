@@ -16,7 +16,7 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+export const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(results: StudentResultModel[], column: SortColumn, direction: string): StudentResultModel[] {
   if (direction === '' || column === '') {

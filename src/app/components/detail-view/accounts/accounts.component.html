@@ -1,1 +1,18 @@
-<p>accounts works!</p>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <ng-container *ngFor="let col of headers">
+        <th scope="col" [fmSortable]="col" (sort)="onSort($event)">
+          {{col | titlecase}}
+        </th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of dataToDisplay">
+      <td *ngFor="let row of headers">
+        {{isDateType(item[row]) ? (item[row] | date:'medium') : (item[row])}}
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -16,13 +16,13 @@
     <li ngbNavItem>
       <a ngbNavLink>Accounts</a>
       <ng-template ngbNavContent>
-        <fm-accounts></fm-accounts>
+        <fm-accounts [data]="data?.card?.accountHistory"></fm-accounts>
       </ng-template>
     </li>
     <li class="ml-auto my-auto">
-      <button type="button" class="btn btn-primary btn-sm">Primary</button>
-      <button type="button" class="btn btn-secondary mx-2 btn-sm">Secondary</button>
-      <button type="button" class="btn btn-dark mr-2 btn-sm">Dark</button>
+      <button type="button" class="btn btn-primary btn-sm">Edit</button>
+      <button type="button" class="btn btn-secondary mx-2 btn-sm">Delete</button>
+      <button type="button" class="btn btn-dark mr-2 btn-sm">Terminate</button>
     </li>
   </ul>
   <div [ngbNavOutlet]="nav"></div>

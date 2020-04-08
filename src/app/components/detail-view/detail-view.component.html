@@ -1,12 +1,16 @@
 <fm-card styleClass="border-primary tabbed-card mt-2">
   <fm-header>
-    Detail View
+    <div class="row">
+      <span class="material-icons mx-2" (click)="goBack()">
+        arrow_back
+      </span>Detail View
+    </div>
   </fm-header>
   <ul ngbNav #nav="ngbNav" class="nav-tabs">
     <li ngbNavItem>
       <a ngbNavLink>Person Detail</a>
       <ng-template ngbNavContent>
-        <fm-person-detail></fm-person-detail>
+        <fm-person-detail [data]="data"></fm-person-detail>
       </ng-template>
     </li>
     <li ngbNavItem>

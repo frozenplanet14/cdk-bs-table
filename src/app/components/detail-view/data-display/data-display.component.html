@@ -1,0 +1,6 @@
+<div [class]="styleClass" *ngFor="let key of objectKeys(itemToDisplay) | filterSlice:itemToDisplay:rowCount">
+  <p class="font-weight-light mb-0">{{key | titlecase}}</p>
+  <p class="font-weight-normal text-break" *ngIf="itemToDisplay[key] as value">
+    {{isDateType(value) ? (value | date:'medium') : (value)}}
+  </p>
+</div>

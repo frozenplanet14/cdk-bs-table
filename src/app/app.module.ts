@@ -23,6 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailViewComponent } from './components/detail-view/detail-view.component';
 import { PersonDetailComponent } from './components/detail-view/person-detail/person-detail.component';
 import { AccountsComponent } from './components/detail-view/accounts/accounts.component';
+import { FilterSlicePipe } from './pipes/filter-slice.pipe';
+import { DataDisplayComponent } from './components/detail-view/data-display/data-display.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AccountsComponent } from './components/detail-view/accounts/accounts.co
     FilterTableComponent,
     DetailViewComponent,
     PersonDetailComponent,
-    AccountsComponent
+    AccountsComponent,
+    FilterSlicePipe,
+    DataDisplayComponent
   ],
   imports: [
     CommonModule,

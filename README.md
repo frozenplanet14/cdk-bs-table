@@ -36,6 +36,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [ng-bootstrap](https://ng-bootstrap.github.io/#/home)
 
+[faker.js](https://github.com/marak/faker.js)
+
 [CDK Table Demo](https://github.com/mainawycliffe/angular-cdk-table-demo)
 
 [CDK Table Sticky Issue](https://github.com/angular/components/issues/10122)

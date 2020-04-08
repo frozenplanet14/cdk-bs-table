@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { SortColumn, SortDirection } from '../directives/sortable.directive';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { tap, debounceTime, switchMap, delay, first } from 'rxjs/operators';
 import { StudentResultModel } from '../models/student-result.model';
 import * as faker from 'faker';
+import { DetailViewModel } from '../models/detail-view.model';
+import { Router } from '@angular/router';
 
 interface State {
   page: number;
@@ -49,7 +51,7 @@ export class StudentService {
     sortDirection: ''
   };
   // tslint:enable: variable-name
-  constructor() {
+  constructor(private ngZone: NgZone, private router: Router) {
     this._fetch$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -70,6 +72,10 @@ export class StudentService {
   set scrolled(scrollIndex: number) { this._set({ scrollIndex }); }
   set sortColumn(sortColumn: SortColumn) { this._set({ sortColumn }); }
   set sortDirection(sortDirection: SortDirection) { this._set({ sortDirection }); }
+
+  navigate(commands: any[]): void {
+    this.ngZone.run(() => this.router.navigate(commands)).then();
+  }
 
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
@@ -123,5 +129,84 @@ export class StudentService {
     results = results.filter(country => matches(country, searchTerm));
 
     return of(results);
+  }
+
+  getDetailViewData(): DetailViewModel {
+    const { name, date, address, commerce, helpers, finance, company } = faker;
+    const data = {
+      name: {
+        firstName: name.firstName(),
+        lastName: name.lastName(),
+        findName: name.findName(),
+        jobTitle: name.jobTitle(),
+        prefix: name.prefix(),
+        suffix: name.suffix(),
+        title: name.title(),
+        jobDescriptor: name.jobDescriptor(),
+        jobArea: name.jobArea(),
+        jobType: name.jobType()
+      },
+      address: {
+        streetName: address.streetName(),
+        streetAddress: address.streetAddress(),
+        streetSuffix: address.streetSuffix(),
+        streetPrefix: address.streetPrefix(),
+        city: address.city(),
+        cityPrefix: address.cityPrefix(),
+        citySuffix: address.citySuffix(),
+        county: address.county(),
+        state: address.state(),
+        stateAbbr: address.stateAbbr(),
+        country: address.country(),
+        countryCode: address.countryCode(),
+        zipCode: address.zipCode(),
+        lat: address.latitude(),
+        lng: address.longitude(),
+        secondaryAddress: address.secondaryAddress(),
+      },
+      commerce: {
+        color: commerce.color(),
+        department: commerce.department(),
+        productName: commerce.productName()
+      },
+      card: helpers.createCard(),
+      contextual: helpers.contextualCard(),
+      userInfo: helpers.userCard(),
+      transaction: helpers.createTransaction(),
+      finance: {
+        account: finance.account(),
+        accountName: finance.accountName(),
+        mask: finance.mask(),
+        amount: finance.amount(),
+        transactionType: finance.transactionType(),
+        currencyCode: finance.currencyCode(),
+        currencyName: finance.currencyName(),
+        currencySymbol: finance.currencySymbol(),
+        bitcoinAddress: finance.bitcoinAddress(),
+        iban: finance.iban(),
+        bic: finance.bic()
+      },
+      company: {
+        suffixes: company.suffixes(),
+        companyName: company.companyName(),
+        companySuffix: company.companySuffix(),
+        catchPhrase: company.catchPhrase(),
+        bs: company.bs(),
+        catchPhraseAdjective: company.catchPhraseAdjective(),
+        catchPhraseDescriptor: company.catchPhraseDescriptor(),
+        catchPhraseNoun: company.catchPhraseNoun(),
+        bsAdjective: company.bsAdjective(),
+        bsBuzz: company.bsBuzz(),
+        bsNoun: company.bsNoun()
+      },
+      date: {
+        past: date.past(),
+        future: date.future(),
+        recent: date.recent(),
+        month: date.month(),
+        weekday: date.weekday()
+      }
+    };
+    return data as any;
   }
 }

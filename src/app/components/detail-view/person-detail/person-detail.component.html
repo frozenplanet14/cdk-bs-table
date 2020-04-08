@@ -1,1 +1,32 @@
-<p>person-detail works!</p>
+<div class="row mx-2">
+  <div class="col-12 col-sm-6 col-lg-3 border-bottom my-2" *ngFor="let item of props">
+    <fm-data-display [itemToDisplay]="data[item]"></fm-data-display>
+  </div>
+  <div class="col-12 m-2">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <div class="row">
+          <p class="col-12 font-weight-bold p-0">Card Detail</p>
+          <fm-data-display class="row" styleClass="col-6" [rowCount]="6" [itemToDisplay]="data?.contextual">
+          </fm-data-display>
+        </div>
+      </div>
+      <div class="col-12 col-md-8">
+        <div class="row">
+          <div class="col-12 col-lg-6 border-left">
+            <div class="row px-2">
+              <p class="col-12 font-weight-bold p-0">Transaction Detail</p>
+              <fm-data-display class="row" styleClass="col-4" [rowCount]="3" [itemToDisplay]="data?.transaction">
+              </fm-data-display>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 px-2 border-left">
+            <p class="col-12 font-weight-bold p-0">Finance</p>
+            <fm-data-display class="row" styleClass="col-4" [rowCount]="6" [itemToDisplay]="data?.finance">
+            </fm-data-display>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
